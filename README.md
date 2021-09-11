@@ -1,4 +1,4 @@
-# RapidElements
-library of electronic parts
+# Chipselect
+library of microcontrollers
 
 Meanwhile empty. ;-)
