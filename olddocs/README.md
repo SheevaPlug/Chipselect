@@ -1,0 +1,3 @@
+# Directory for old documentation, settings, ...
+
+This directory will contain the existing code for Lars' first project.
