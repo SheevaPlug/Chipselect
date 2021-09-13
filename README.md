@@ -64,6 +64,17 @@ $ docker run --publish 127.0.0.1:9200:9200 --name esearch \
 
 (The last command has been split at the backslashes ("\") to fit.)
 
+ATTENTION! For performance reasons, Elasticsearch assumes to run 
+on a dedicated server and preallocate little more than 50% of the
+machine's overall memory. This should not be necessary for this 
+application, thus you should restrict the available memory for at 
+least 2 GiB in your "docker run" or "docker create" commands. But 
+although 2 GiB should work fine, with more allocated memory (such
+as 4 or better 8 GiB) you might experience a better performance. 
+So, if you'd wish to limit Elasticsearchs memory usage, please 
+use the "--memory" command line option for your "docker run" and
+"docker create" commands. 
+
 To make sure Elasticsearch is running and locally reachable, try 
 the following command: 
 
@@ -90,4 +101,6 @@ The output should look something like:
   "tagline" : "You Know, for Search"
 }
 --snap-----
+
+If you see this output, everything should work fine. Have fun!
 
