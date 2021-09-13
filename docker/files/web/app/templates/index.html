@@ -1,8 +1,8 @@
 {% extends '__base__.html' %}
 
 {%- block content -%}
-  <div class="errors">
-    {%- if form.errors -%}
+  {%- if form.errors -%}
+    <div class="errors">
       <ul class="errorhead">
 	{%- for error in form.errors -%}
 	  <li>
@@ -15,8 +15,8 @@
 	  </li>
 	{%- endfor -%}
       </ul>
-    {%- endif -%}
-  </div>
+    </div>
+  {%- endif -%}
   <form method="POST">
     {{ form.hidden_tag() }}
     <table id="search">

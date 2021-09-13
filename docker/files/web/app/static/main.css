@@ -29,3 +29,13 @@ body {
     border-left: 1px solid black;
     padding: 40px;
 }
+
+div.errors {
+    border: 1px solid red;
+    padding: 10px;
+    background-color: yellow;
+    margin-bottom: 20px;
+}
+div.errors ul {
+    margin-top: 0px;
+}
