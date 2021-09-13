@@ -1,1 +1,31 @@
 {% extends '__base__.html' %}
+
+{%- block content -%}
+  <div class="errors">
+    {%- if form.errors -%}
+      <ul class="errorhead">
+	{%- for error in form.errors -%}
+	  <li>
+	    {{ form[error].label }}:
+	    <ul class="">
+	      {%- for message in form.errors[error] -%}
+		<li>{{ message }}</li>
+	      {%- endfor -%}
+	    </ul>
+	  </li>
+	{%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <table id="search">
+      <tr>
+	<th>{{ form.query.label }}</th>
+	<td>{{ form.query }}</td>
+      </tr>
+      <tr>
+	<td colspan="2" align="right"><input type="submit" value="Ok"></td>
+      </tr>      
+  </form>
+{%- endblock -%}

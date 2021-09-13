@@ -17,6 +17,9 @@ body {
 #navigation a {
     text-decoration: none;
 }
+#navigation ul {
+    margin-top: 0px;
+}
 #navigation li {
     list-style-type: none;
 }

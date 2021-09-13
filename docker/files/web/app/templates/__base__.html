@@ -2,11 +2,11 @@
 <html lang="de">
   <head>
     <title>Mikrocontroller-Suche</title>
-    {% block styles %}<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />{% endblock %}
-    {% block scripts %}<script src="{{ url_for('static', filename='main.js') }}"></script>{% endblock %}
+    {%- block styles -%}<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />{%- endblock -%}
+    {%- block scripts -%}<script src="{{ url_for('static', filename='main.js') }}"></script>{%- endblock -%}
   </head>
   <body>
-    {% block navigation %}<div id="navigation">{% include "navigation.html" %}</div>{% endblock %}
-    {% block content %}<div id="content"></div>{% endblock %}
+    <div id="navigation">{%- block navigation -%}{%- include "navigation.html" -%}{%- endblock -%}</div>
+    <div id="content">{%- block content -%}{%- endblock -%}</div>
   </body>
 </html>
