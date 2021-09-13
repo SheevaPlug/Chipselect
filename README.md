@@ -24,9 +24,9 @@ complete compiler toolchain on your system.
 Then, with these both installed, take the following steps in the 
 root directory of this code (the directory this file is in):
 
-$ virtualenv v3
-$ source v3/bin/activate
-$ pip install -r requirements.txt
+\$ virtualenv v3
+\$ source v3/bin/activate
+\$ pip install -r requirements.txt
 
 These commands will create a virtualenv (virtual environment) for 
 Python and install a copy of your Python interpreter and several 
@@ -44,8 +44,8 @@ and then you are ready to go.
 After these steps, head over into "docker/files/web" and start 
 the development server: 
 
-$ cd docker/files/web/
-$ flask run --debugger --reload --extra-files app/templates:app/static
+\$ cd docker/files/web/
+\$ flask run --debugger --reload --extra-files app/templates:app/static
 
 This will run the development server on your localhost port 5000, 
 if needed you can change this with the "--port" command line option
@@ -57,8 +57,8 @@ of Elasticsearch is necessary. We will ease the process for the
 moment and install Elasticsearch as a Docker image. First, we'll 
 download the image, and then run it as follows: 
 
-$ docker pull docker.elastic.co/elasticsearch/elasticsearch:7.14.1
-$ docker run --publish 127.0.0.1:9200:9200 --name esearch \
+\$ docker pull docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+\$ docker run --publish 127.0.0.1:9200:9200 --name esearch \
   -e "discovery.type=single-node" \
   docker.elastic.co/elasticsearch/elasticsearch:7.14.1
 
@@ -78,7 +78,7 @@ use the "--memory" command line option for your "docker run" and
 To make sure Elasticsearch is running and locally reachable, try 
 the following command: 
 
-$ curl -XGET 'http://localhost:9200/'
+\$ curl -XGET 'http://localhost:9200/'
 
 The output should look something like: 
 
