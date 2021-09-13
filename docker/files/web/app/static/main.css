@@ -6,17 +6,23 @@ body {
     margin: 0 !important;
     padding: 0 !important;
     display: grid;
-    grid-template-columns: 1fr 8fr;
+    grid-template-columns: 1fr 6fr;
     min-height: 100vh;
 }
 
 #navigation {
     grid-column: 1;
+    padding: 40px;
 }
+#navigation a {
+    text-decoration: none;
+}
+#navigation li {
+    list-style-type: none;
+}
+
 #content {
     grid-column: 2;
     border-left: 1px solid black;
+    padding: 40px;
 }
-
-#navigation a { text-decoration: none; }
-#navigation li { list-style-type: none; }
