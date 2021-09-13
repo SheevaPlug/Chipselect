@@ -1,7 +1,7 @@
 # Chipselect
 library of microcontrollers
 
-## Install with development server
+## Install the development server
 
 ATTENTION! This option is just for development purposes and shall
 NEVER EVER be used in a production environment! 
@@ -9,6 +9,7 @@ NEVER EVER be used in a production environment!
 Required: 
   - Python 3
   - virtualenv
+  - Elasticsearch
 
 First, install Python3 (version 3.8.10 used for development, but 
 most other versions should work, too) and virtualenv. For mostly 
@@ -50,4 +51,43 @@ This will run the development server on your localhost port 5000,
 if needed you can change this with the "--port" command line option
 to "flask run". So, start your web browser and point it to the URL 
 "http://localhost:5000/" and enjoy! 
+
+In order to do something useful with the application, an install 
+of Elasticsearch is necessary. We will ease the process for the 
+moment and install Elasticsearch as a Docker image. First, we'll 
+download the image, and then run it as follows: 
+
+$ docker pull docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+$ docker run --publish 127.0.0.1:9200:9200 --name esearch \
+  -e "discovery.type=single-node" \
+  docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+
+(The last command has been split at the backslashes ("\") to fit.)
+
+To make sure Elasticsearch is running and locally reachable, try 
+the following command: 
+
+$ curl -XGET 'http://localhost:9200/'
+
+The output should look something like: 
+
+--snip-----
+{
+  "name" : "6049f5cd496e",
+  "cluster\_name" : "docker-cluster",
+  "cluster\_uuid" : "gSCkvVK4SlSLL\_erRwo9EA",
+  "version" : {
+    "number" : "7.14.1",
+    "build\_flavor" : "default",
+    "build\_type" : "docker",
+    "build\_hash" : "66b55ebfa59c92c15db3f69a335d500018b3331e",
+    "build\_date" : "2021-08-26T09:01:05.390870785Z",
+    "build\_snapshot" : false,
+    "lucene_version" : "8.9.0",
+    "minimum\_wire\_compatibility\_version" : "6.8.0",
+    "minimum\_index\_compatibility\_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+--snap-----
 
