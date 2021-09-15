@@ -40,6 +40,19 @@ div.errors ul {
     margin-top: 0px;
 }
 
+table tr, table td {
+    vertical-align: top;
+}
+
+th.searchinput {
+    padding-top: 12px;
+}
+td.searchinput input {
+    padding: 8px;
+    width: 500px;
+    border-radius: 5px;
+}
+
 table.result {
     margin-bottom: 40px;
     border-collapse: collapse;

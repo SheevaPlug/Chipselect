@@ -21,8 +21,8 @@
     {{ form.hidden_tag() }}
     <table id="search">
       <tr>
-	<th>{{ form.query.label }}</th>
-	<td>{{ form.query }}</td>
+	<th class="searchinput"><span>{{ form.query.label }}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+	<td class="searchinput">{{ form.query }}</td>
       </tr>
       <tr>
 	<td colspan="2" align="right"><input type="submit" value="Ok"></td>
@@ -37,7 +37,7 @@
 	  <td>
 	    <table class="result">
 	      <tr>
-		<td colspan="2" class="resultaction"><a href="{{ url_for('show', deviceid=result._id) }}">Actions</a></td>
+		<td colspan="2" class="resultaction" align="right"><a href="{{ url_for('show', deviceid=result._id) }}">Actions</a></td>
 	      </tr>
 	      {%- for key in result._source.keys() -%}
 		<tr>
@@ -45,6 +45,9 @@
 		  <td>{{ result._source[key] }}</td>
 		</tr>
 	      {%- endfor -%}
+	      <tr>
+		<td colspan="2" class="resultaction" align="right">Score: {{ '%0.3f'|format(result._score) }}</td>
+	      </tr>
 	    </table>
 	  </td>
 	</tr>
