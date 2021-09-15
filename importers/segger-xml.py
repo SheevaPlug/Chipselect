@@ -12,18 +12,26 @@ def clean_dict(d):
     rv = {}
     for key in d.keys():
         if key.startswith('@'):
-            rv[key[1:]] = d[key]
+            if type(d[key]) is dict or type(d[key]) is OrderedDict:
+                rv[key[1:]] = clean_dict(d[key])
+            elif type(d[key]) is list:
+                nv = []
+                for item in d[key]:
+                    nv.append(clean_dict(item))
+                rv[key[1:]] = nv
+            else:
+                rv[key[1:]] = d[key]
         else:
-            rv[key] = d[key]
-    d = rv
-    rv = {}
-    for key in d.keys():
-        if type(d[key]) is dict or type(d[key]) is OrderedDict:
-            rv[key] = clean_dict(d[key])
-        else:
-            rv[key] = d[key]
+            if type(d[key]) is dict or type(d[key]) is OrderedDict:
+                rv[key] = clean_dict(d[key])
+            elif type(d[key]) is list:
+                nv = []
+                for item in d[key]:
+                    nv.append(clean_dict(item))
+                rv[key] = nv
+            else:
+                rv[key] = d[key]
     return rv
-
 
 
 if __name__ == '__main__':
