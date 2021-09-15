@@ -130,8 +130,7 @@ and a colon (':'): 'vendor:Zilog AND core:"Cortex-M0"'.
 
 All searches and field names are case-insensitive, you can 
 group parts of the query with parentheses and combine them 
-logically with "AND" and "OR", while "AND" is the default 
-and thus not needed. 
+logically with "AND" and "OR", while "OR" is the default. 
 
 Please notice that the output is still very raw and by far 
 not in a presentable shape, so please remember that we are 

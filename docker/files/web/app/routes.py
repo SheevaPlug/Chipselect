@@ -14,7 +14,7 @@ def index():
         results = app.search.search(
             index='mcs',
             body={'query': {'query_string': {'query': form.query.data}}})
-        #print(results)
+        from pprint import pprint; pprint(results)
     else:
         print(form.errors)
     return render_template('index.html', form=form, results=results)

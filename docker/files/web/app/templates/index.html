@@ -31,6 +31,7 @@
   </form>
   {%- if results -%}
     <table class="results">
+      <tr><td>Found {{ results.hits.total.value }} results in {{ results.took }} ms.</td></tr>
       {%- for result in results.hits.hits -%}
 	<tr>
 	  <td>
