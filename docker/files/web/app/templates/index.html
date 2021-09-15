@@ -37,7 +37,7 @@
 	  <td>
 	    <table class="result">
 	      <tr>
-		<td colspan="2" class="resultaction"><a href="{{ result._id }}">Actions</a></td>
+		<td colspan="2" class="resultaction"><a href="{{ url_for('show', deviceid=result._id) }}">Actions</a></td>
 	      </tr>
 	      {%- for key in result._source.keys() -%}
 		<tr>

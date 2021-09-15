@@ -1,0 +1,21 @@
+{% extends '__base__.html' %}
+
+{%- block content -%}
+  <table class="results">
+    <tr>
+      <td>
+	<table class="result">
+	  <tr>
+	    <td colspan="2" class="resultaction"><a href="{{ result._id }}">@todo Actions</a></td>
+	  </tr>
+	  {%- for key in result.keys() -%}
+	    <tr>
+	      <td class="name">{{ key }}</td>
+	      <td>{{ result[key] }}</td>
+	    </tr>
+	  {%- endfor -%}
+	</table>
+      </td>
+    </tr>
+  </table>
+{%- endblock -%}

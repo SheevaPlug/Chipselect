@@ -41,9 +41,14 @@ div.errors ul {
 }
 
 table.result {
-    /*border: 1px solid black;*/
-    margin: 25px;
-    margin-left: 0;
+    margin-bottom: 40px;
+    border-collapse: collapse;
+}
+table.result th, table.result td {
+    border: 1px solid black;
+}
+table.result tr:nth-child(odd) {
+    background-color: #f9f9f9;
 }
 table.result td {
     padding: 5px;
