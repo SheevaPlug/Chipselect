@@ -104,3 +104,35 @@ The output should look something like:
 
 If you see this output, everything should work fine. Have fun!
 
+
+## Getting started with data
+
+To load some data into Elasticsearch, we provide a script in 
+the "importers/" subdirectory named "segger-xml.py". Provided 
+your Elasticsearch instance is listening at localhost:9200, 
+you can run "segger-xml.py" with the segger xml file as first 
+argument: 
+
+  ./segger-xml.py jlink_dev_list.xml
+
+The script will read the XML file and import its data into 
+your local Elasticsearch instance. After that, you can try 
+running some basic searches in the web frontend using the 
+Elasticsearch described in this document:
+
+https://www.elastic.co/guide/en/elasticsearch/reference/7.14/query-dsl-query-string-query.html#query-string-syntax
+
+For example, you can search for 'Zilog' to find the first 
+ten devices by this vendor, or try 'Zilog "Cortex-M0"' to 
+find Zilog devices with this score. You can search within 
+certain fields prepending your search string with its name 
+and a colon (':'): 'vendor:Zilog AND core:"Cortex-M0"'. 
+
+All searches and field names are case-insensitive, you can 
+group parts of the query with parentheses and combine them 
+logically with "AND" and "OR", while "AND" is the default 
+and thus not needed. 
+
+Please notice that the output is still very raw and by far 
+not in a presentable shape, so please remember that we are 
+still in an very early stage of development. Enjoy! ;-)
