@@ -39,3 +39,22 @@ div.errors {
 div.errors ul {
     margin-top: 0px;
 }
+
+table.result {
+    /*border: 1px solid black;*/
+    margin: 25px;
+    margin-left: 0;
+}
+table.result td {
+    padding: 5px;
+    width: 100%;
+}
+table.result td.name {
+    width: 200px;
+}
+.resultaction {
+    background-color: #eeeeee;
+}
+.resultaction a {
+    text-decoration: none;
+}

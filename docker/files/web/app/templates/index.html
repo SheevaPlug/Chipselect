@@ -26,6 +26,28 @@
       </tr>
       <tr>
 	<td colspan="2" align="right"><input type="submit" value="Ok"></td>
-      </tr>      
+      </tr>
+    </table>
   </form>
+  {%- if results -%}
+    <table class="results">
+      {%- for result in results.hits.hits -%}
+	<tr>
+	  <td>
+	    <table class="result">
+	      <tr>
+		<td colspan="2" class="resultaction"><a href="{{ result._id }}">Actions</a></td>
+	      </tr>
+	      {%- for key in result._source.keys() -%}
+		<tr>
+		  <td class="name">{{ key }}</td>
+		  <td>{{ result._source[key] }}</td>
+		</tr>
+	      {%- endfor -%}
+	    </table>
+	  </td>
+	</tr>
+      {%- endfor -%}
+    </table>
+  {% endif -%}
 {%- endblock -%}
