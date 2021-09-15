@@ -34,5 +34,6 @@
  - economics: 
    - find sponsor(s) for development
    - find cooperative developers
+   - get manufacturers to add their devices (?)
    - kudos (?)
    - maybe ads (?)
