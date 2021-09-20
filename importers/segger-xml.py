@@ -33,6 +33,15 @@ def clean_dict(d):
                 rv[key] = d[key]
     return rv
 
+def clean_aliasinfo(data):
+    if 'AliasInfo' in data.keys():
+        if type(data['AliasInfo']) is list:
+            aliases = [d.get('Name') for d in data['AliasInfo']]
+        elif type(data['AliasInfo']) is dict:
+            aliases = [data['AliasInfo'].get('Name', '')]
+        data['AliasInfo'] = aliases
+    return data
+
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='read SEGGER XML file')
@@ -50,14 +59,15 @@ if __name__ == '__main__':
             device = {}            
             device['vendor'] = vendorname
             device.update(clean_dict(deviceinfos))
+            device = clean_aliasinfo(device)
             devices.append(device)
         else:
             for deviceinfo in deviceinfos:
                 device = {}
                 device['vendor'] = vendorname
                 device.update(clean_dict(deviceinfo))
+                device = clean_aliasinfo(device)
                 devices.append(device)
-
     #
     ops = []
     for device in devices:
