@@ -1,4 +1,5 @@
 {% extends '__base__.html' %}
+{% from '__datastructure__.html' import datastructure with context %}
 
 {%- block content -%}
   {%- if form.errors -%}
@@ -32,6 +33,7 @@
   {%- if results -%}
     <table class="results">
       <tr><td>Found {{ results.hits.total.value }} results in {{ results.took }} ms.</td></tr>
+
       {%- for result in results.hits.hits -%}
 	<tr>
 	  <td>
@@ -39,12 +41,19 @@
 	      <tr>
 		<td colspan="2" class="resultaction" align="right"><a href="{{ url_for('show', deviceid=result._id) }}">Actions</a></td>
 	      </tr>
+	      {#
 	      {%- for key in result._source.keys() -%}
-		<tr>
-		  <td class="name">{{ key }}</td>
-		  <td>{{ result._source[key] }}</td>
-		</tr>
+	      <tr>
+	      <td class="name">{{ key }}</td>
+	      <td>{{ result._source[key] }}</td>
+	      </tr>
 	      {%- endfor -%}
+	      #}
+
+	      {%- for key in result._source.keys() -%}
+		{{ datastructure(key, result._source[key]) }}
+	      {%- endfor -%}
+	      
 	      <tr>
 		<td colspan="2" class="resultaction" align="right">Score: {{ '%0.3f'|format(result._score) }}</td>
 	      </tr>
@@ -52,6 +61,9 @@
 	  </td>
 	</tr>
       {%- endfor -%}
+      
+      
+      
     </table>
   {% endif -%}
 {%- endblock -%}

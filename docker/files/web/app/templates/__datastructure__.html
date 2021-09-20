@@ -1,0 +1,30 @@
+{% macro datastructure(name, value) %}
+  <tr>
+    <td>
+      {{ name }}
+    </td>
+    <td>
+      {% if value is string or value is number %}
+	{{ value }}
+      {% elif value is boolean %}
+	{% if value %}
+	  true
+	{% else %}
+	  false
+	{% endif %}
+      {% elif value is mapping  %}
+	<table>
+	  {% for key in value.keys() %}
+	    {{ datastructure(key, value[key]) }}
+	  {% endfor %}
+	</table>
+      {% elif value is sequence %}
+	<ul>
+	  {% for field in value %}
+	    <li>{{ field }}</li>
+	  {% endfor %}
+	</ul>
+      {% endif %}
+    </td>
+  </tr>
+{% endmacro %}
