@@ -135,3 +135,57 @@ logically with "AND" and "OR", while "OR" is the default.
 Please notice that the output is still very raw and by far 
 not in a presentable shape, so please remember that we are 
 still in an very early stage of development. Enjoy! ;-)
+
+
+## Getting started with docker-compose
+
+To run this software with docker-compose, you need to have 
+-- surprise! -- docker and docker-compose installed. Then, 
+you do the following steps from the root directory in this 
+repository: 
+
+$ (cd docker && docker build --tag chipselect .)
+
+This will take some time to build your local docker image; 
+please note that we run these commands in a subshell, thus
+you will find yourself in the root directory after that is 
+done. (You could also "cd docker; docker build...; cd .." 
+instead, if you wish.) 
+
+Then, we start our services with docker-compose from this 
+root directory: 
+
+$ docker-compose up
+
+and you'll see a short message from our web service, then 
+-- after a while -- followed by the looong output of the 
+typical Java application that Elasticsearch is. When you 
+run this the first time, the Elasticsearch docker image 
+will have to be pulled from elastic.co's Docker Registry 
+which will take some time. 
+
+After a while, an empty Elasticsearch docker instance and 
+our web fronend will run, so you can import data with the 
+appropriate import scripts. There are two scripts in our 
+"importers/" subdirectory, so run the following with the 
+virtualenv (see above) activated -- please note that we 
+have intentionally kept the data files out of this repo: 
+
+$ cd importers
+$ ./segger-xml.py <jlink_dev_list.xml>
+$ ./microcontroller_and_processors-2020-08-14.py \
+  <microcontroller_and_processors-2020-08-14.xlsx> 
+  
+Please note that Elasticsearch and its driver output a 
+warning on an insecure installation. For us, this is 
+completely pointless, as all network interfaces are 
+strictly bound to our local network device... ;-) 
+
+When everything is done, point your web browser to 
+
+"http://localhost:5001/" 
+
+and try some searches like "cortex AND DDR2"... 
+
+Have fun! 
+
