@@ -1,0 +1,27 @@
+version: "3.5"
+
+services:
+  
+  chipselect:
+    image: chipselect
+    ports:
+      - "127.0.0.1:5001:5000"
+    environment:
+      CONFIGFILE: app:config-production
+    networks:
+      - chipselect
+
+  esearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+    expose:
+      - "9200"
+    ports:
+      - "127.0.0.1:9200:9200"
+    environment:
+      discovery.type: single-node
+    networks:
+      - chipselect
+
+networks:
+  chipselect:
+    driver: bridge
