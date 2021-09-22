@@ -57,10 +57,9 @@ of Elasticsearch is necessary. We will ease the process for the
 moment and install Elasticsearch as a Docker image. First, we'll 
 download the image, and then run it as follows: 
 
-\$ docker pull docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+\$ docker pull elasticsearch:7.14.1
 \$ docker run --publish 127.0.0.1:9200:9200 --name esearch \
-  -e "discovery.type=single-node" \
-  docker.elastic.co/elasticsearch/elasticsearch:7.14.1
+  -e "discovery.type=single-node" elasticsearch:7.14.1
 
 (The last command has been split at the backslashes ("\") to fit.)
 
