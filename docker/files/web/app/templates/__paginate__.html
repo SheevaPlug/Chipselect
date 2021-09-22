@@ -1,0 +1,4 @@
+{% macro paginate(baseurl, name, start, min=0, max=-1) %}
+  <a href="{{ url_for(baseurl, name=name, start=start - config.get('PAGINATE', 20)) }}">&lt;</a>
+  <a href="{{ url_for(baseurl, name=name, start=start + config.get('PAGINATE', 20)) }}">&gt;</a>
+{% endmacro %}
