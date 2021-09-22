@@ -1,0 +1,11 @@
+{% extends '__base__.html' %}
+
+{%- block content -%}
+  <h1>Übersicht Hersteller</h1>
+  <table class="result">
+    <tr><th>Hersteller</th><th>Anzahl</th></tr>
+    {%- for maker in results.aggregations.makers.buckets -%}
+      <tr><td><a href="{{ url_for('tree.vendor', name=maker.key) }}">{{ maker.key }}</a></td><td>{{ maker.doc_count }}</td></tr>
+    {%- endfor -%}
+  </table>
+{%- endblock -%}

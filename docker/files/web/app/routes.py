@@ -19,3 +19,4 @@ def index():
 def show(deviceid):
     result = app.search.get_source(index='mcs', id=deviceid)
     return render_template('show.html', result=result)
+
