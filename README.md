@@ -58,8 +58,10 @@ moment and install Elasticsearch as a Docker image. First, we'll
 download the image, and then run it as follows: 
 
 \$ docker pull elasticsearch:7.14.1
+\$ docker network create esearch
 \$ docker run --publish 127.0.0.1:9200:9200 --name esearch \
-  -e "discovery.type=single-node" elasticsearch:7.14.1
+  --net esearch -e "discovery.type=single-node" \
+  elasticsearch:7.14.1
 
 (The last command has been split at the backslashes ("\") to fit.)
 
@@ -102,6 +104,22 @@ The output should look something like:
 --snap-----
 
 If you see this output, everything should work fine. Have fun!
+
+
+### Optional: run Kibana
+
+Elasticsearch has a nice web frontend called kibana. You can 
+run it with the following commands:
+
+\$ docker pull kibana:7.14.1
+\$ docker run --publish 127.0.0.1:5601:5601 --name kibana \
+  --net esearch kibana:7.14.1
+
+and then access kibana on 
+
+  http://localhost:5601/
+  
+This is an optional step as most users will not need kibana.
 
 
 ## Getting started with data
