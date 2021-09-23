@@ -80,16 +80,13 @@ table.result td.name {
 table.tablecell {
     border-collapse: collapse;
 }
-/*table.tablecell td {
-    background-color: #ffffff;
-}*/
 ul.tablecell{
     margin: 0px;
 }
 
 .pagination {
     border: 1px solid black;
-    padding: 1px 4px;
+    padding: 3px 4px 0px 4px;
     margin: 2px;
 }
 .pagination a {

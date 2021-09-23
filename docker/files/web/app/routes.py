@@ -10,7 +10,7 @@ def index():
     results = []
     if form.validate_on_submit():
         results = app.search.search(
-            index='mcs',
+            index=app.config.get('INDEX_MAIN', 'mcs'),
             body={'query': {'query_string': {'query': form.query.data}}})
     return render_template('index.html', form=form, results=results)
 
@@ -18,6 +18,7 @@ def index():
 @app.route('/show/<deviceid>')
 def show(deviceid):
     # @todo move this into "tree" blueprint
-    result = app.search.get_source(index='mcs', id=deviceid)
+    result = app.search.get_source(
+        index=app.config.get('INDEX_MAIN', 'mcs'),
+        id=deviceid)
     return render_template('show.html', result=result)
-
