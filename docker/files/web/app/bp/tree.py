@@ -9,9 +9,8 @@ def index():
     results = app.search.search(
         index='mcs',
         body={'size': 0, 'aggs': {'makers': {'terms': {'field': 'vendor.keyword'}}}})
-    return render_template(
-        'tree/index.html',
-        results=results)
+    #import json; print(json.dumps(results))
+    return render_template('tree/index.html', results=results)
 
 
 @tree.route('/vendor/<name>', defaults={'start': 0})
@@ -20,4 +19,5 @@ def vendor(name, start=0):
     results = app.search.search(
         index='mcs',
         body={'from': start, 'size': app.config.get('PAGINATION', 20), 'query': {'term': {'vendor.keyword': name}}})
+    #import json; print(json.dumps(results))
     return render_template('tree/vendor.html', results=results, name=name, start=start)

@@ -4,7 +4,7 @@
 
 {%- block content -%}
   {%- if results -%}
-    {{ paginate('tree.vendor', name=name, start=start) }}
+    {{ paginate('tree.vendor', name=name, start=start, min=0, max=results.hits.total.value) }}
     <table class="results">
       <tr><td>Found {{ results.hits.total.value }} results in {{ results.took }} ms.</td></tr>
       {%- for result in results.hits.hits -%}
@@ -22,6 +22,6 @@
 	</tr>
       {%- endfor -%}
     </table>
-    {{ paginate('tree.vendor', name=name, start=start) }}
+    {{ paginate('tree.vendor', name=name, start=start, min=0, max=results.hits.total.value) }}
   {% endif -%}
 {%- endblock -%}

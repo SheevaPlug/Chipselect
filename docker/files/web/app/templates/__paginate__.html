@@ -1,4 +1,18 @@
 {% macro paginate(baseurl, name, start, min=0, max=-1) %}
-  <a href="{{ url_for(baseurl, name=name, start=start - config.get('PAGINATE', 20)) }}">&lt;</a>
-  <a href="{{ url_for(baseurl, name=name, start=start + config.get('PAGINATE', 20)) }}">&gt;</a>
+  {% set beginning = start - config.get('PAGINATE', 20) %}
+  {% set ending = start + config.get('PAGINATE', 20) %}
+  <span class="pagination">
+    {% if beginning >= min %}
+      <a href="{{ url_for(baseurl, name=name, start=beginning) }}">&#x25c4;</a>
+    {% elif start > 0 %}
+      <a href="{{ url_for(baseurl, name=name, start=0) }}">&#x25c4;</a>
+    {% else %}
+      &#x25c4;
+    {% endif %}{#- ##################################################### -#}
+    {% if max <= 0 or ending < max %}
+      <a href="{{ url_for(baseurl, name=name, start=ending) }}">&#x25BA;</a>
+    {% else %}
+      &#x25BA;
+    {% endif %}
+  </span>
 {% endmacro %}

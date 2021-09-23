@@ -13,13 +13,13 @@
 	  false
 	{% endif %}
       {% elif value is mapping  %}
-	<table>
+	<table class="tablecell">
 	  {% for key in value.keys() %}
 	    {{ datastructure(key, value[key]) }}
 	  {% endfor %}
 	</table>
       {% elif value is sequence %}
-	<ul>
+	<ul class="tablecell">
 	  {% for field in value %}
 	    <li>{{ field }}</li>
 	  {% endfor %}

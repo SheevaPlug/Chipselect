@@ -17,6 +17,7 @@ def index():
 
 @app.route('/show/<deviceid>')
 def show(deviceid):
+    # @todo move this into "tree" blueprint
     result = app.search.get_source(index='mcs', id=deviceid)
     return render_template('show.html', result=result)
 
