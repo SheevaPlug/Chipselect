@@ -31,7 +31,7 @@ body {
 }
 
 div.errors {
-    border: 1px solid red;
+    border: 3px solid red;
     padding: 10px;
     background-color: yellow;
     margin-bottom: 20px;
