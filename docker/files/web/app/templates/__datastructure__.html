@@ -1,35 +1,43 @@
-{% macro datastructure(value) %}
-  <table class="tablecell">
+{% macro datastructure(value, maxdepth=0, depth=0) %}
+  {% if maxdepth > 0 %}
+    {% set depth = depth + 1 %}
+  {% endif %}
+
+  {% if depth <= maxdepth %}
     
-    {% if value is string or value is number %}
-      <tr><td style="border: none">{{ value }}</td></tr>
+    <table class="tablecell">
+    
+      {% if value is string or value is number %}
+	<tr><td style="border: none">{{ value }}</td></tr>
       
-    {% elif value is boolean %}
-      <tr><td>{% if value %}true{% else %}false{% endif %}</td></tr>
+      {% elif value is boolean %}
+	<tr><td>{% if value %}true{% else %}false{% endif %}</td></tr>
       
-    {% elif value is mapping  %}
-      <tr>
-	<td>
-	  <table class="tablecell">
-	    {% for key in value.keys() %}
-	      <tr>
-		<td>{{ key }}</td>
-		<td>{{ datastructure(value[key]) }}</td>
-	      </tr>
+      {% elif value is mapping  %}
+	<tr>
+	  <td>
+	    <table class="tablecell">
+	      {% for key in value.keys() %}
+		<tr>
+		  <td>{{ key }}</td>
+		  <td>{{ datastructure(value[key], maxdepth, depth) }}</td>
+		</tr>
+	      {% endfor %}
+	    </table>
+	  </td>
+	</tr>
+	
+      {% elif value is sequence %}
+	<tr>
+	  <td>
+	    {% for field in value %}
+	      {{ datastructure(field, maxdepth, depth) }}
 	    {% endfor %}
-	  </table>
-	</td>
-      </tr>
-      
-    {% elif value is sequence %}
-      <tr>
-	<td>
-	  {% for field in value %}
-	    {{ datastructure(field) }}
-	  {% endfor %}
-	</td>
-      </tr>
+	  </td>
+	</tr>
+	
+      {% endif %}
+    </table>
     
-    {% endif %}
-  </table>
+  {% endif %}
 {% endmacro %}

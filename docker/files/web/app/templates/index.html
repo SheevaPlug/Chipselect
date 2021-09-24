@@ -40,7 +40,7 @@
 	      <tr>
 		<td colspan="2" class="resultaction" align="right"><a href="{{ url_for('show', deviceid=result._id) }}">Actions</a></td>
 	      </tr>
-	      <tr><td>{{ datastructure(result._source) }}</td></tr>	      
+	      <tr><td>{{ datastructure(result._source, 0) }}</td></tr>
 	      <tr>
 		<td colspan="2" class="resultaction" align="right">Score: {{ '%0.3f'|format(result._score) }}</td>
 	      </tr>
