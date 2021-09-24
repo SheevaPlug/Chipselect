@@ -14,9 +14,7 @@
 	      <tr>
 		<td colspan="2" class="resultaction" align="right"><a href="{{ url_for('show', deviceid=result._id) }}">Actions</a></td>
 	      </tr>
-	      {%- for key in result._source.keys() -%}
-		{{ datastructure(key, result._source[key]) }}
-	      {%- endfor -%}
+	      <tr><td>{{ datastructure(result._source) }}</td></tr>
 	    </table>
 	  </td>
 	</tr>

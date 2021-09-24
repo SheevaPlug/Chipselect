@@ -5,7 +5,7 @@
 
   {% if depth <= maxdepth %}
     
-    <table class="tablecell">
+    <table>
     
       {% if value is string or value is number %}
 	<tr><td style="border: none">{{ value }}</td></tr>
@@ -15,7 +15,7 @@
       
       {% elif value is mapping  %}
 	<tr>
-	  <td>
+	  <td style="border: none;">
 	    <table class="tablecell">
 	      {% for key in value.keys() %}
 		<tr>
