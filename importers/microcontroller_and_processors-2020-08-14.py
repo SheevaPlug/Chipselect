@@ -4,8 +4,16 @@ from argparse import ArgumentParser
 
 import numpy as np
 import pandas as pd
-from elasticsearch import Elasticsearch
-from elasticsearch.helpers import bulk as esbulk
+from opensearchpy import OpenSearch
+from opensearchpy.helpers import bulk as osbulk
+
+OPENSEARCH_PARAMS = {
+    'hosts': [{'host': 'localhost', 'port': 9200}], 
+    'http_auth': ('admin', 'admin'),
+    'use_ssl': True,
+    'verify_certs': False,
+    'ssl_show_warn': False,
+}
 
 
 def clean_strings(s):
@@ -27,6 +35,7 @@ if __name__ == '__main__':
     parser.add_argument('infile', default='microcontroller_and_processors-2020-08-14.xlsx', help='input file')
     parser.add_argument('--tryout', '-t', action='store_true', help='output data instead of writing')
     args = parser.parse_args()
+
     
     df = pd.read_excel(args.infile)
     df_obj = df.select_dtypes(['object'])
@@ -44,6 +53,5 @@ if __name__ == '__main__':
             '_source': set_vendor(m)
             } for m in data
         ]
-        esbulk(Elasticsearch(), ops)
-        
-    
+        osbulk(OpenSearch(**OPENSEARCH_PARAMS), ops)
+

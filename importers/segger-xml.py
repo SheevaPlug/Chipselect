@@ -3,8 +3,16 @@ from collections import OrderedDict
 from argparse import ArgumentParser
 
 from xmltodict import parse as xmlparse
-from elasticsearch import Elasticsearch
-from elasticsearch.helpers import bulk as esbulk
+from opensearchpy import OpenSearch
+from opensearchpy.helpers import bulk as osbulk
+
+OPENSEARCH_PARAMS = {
+    'hosts': [{'host': 'localhost', 'port': 9200}], 
+    'http_auth': ('admin', 'admin'),
+    'use_ssl': True,
+    'verify_certs': False,
+    'ssl_show_warn': False,
+}
 
 
 def clean_dict(d):
@@ -79,6 +87,5 @@ if __name__ == '__main__':
                 '_source': device
             }
         )
-    es = Elasticsearch()
-    esbulk(es, ops)
-    print('done.')
+        pass
+    osbulk(OpenSearch(**OPENSEARCH_PARAMS), ops)

@@ -7,8 +7,16 @@ from argparse import ArgumentParser
 from collections import OrderedDict
 
 import xmltodict
-from elasticsearch import Elasticsearch
-from elasticsearch.helpers import bulk as esbulk
+from opensearchpy import OpenSearch
+from opensearchpy.helpers import bulk as osbulk
+
+OPENSEARCH_PARAMS = {
+    'hosts': [{'host': 'localhost', 'port': 9200}], 
+    'http_auth': ('admin', 'admin'),
+    'use_ssl': True,
+    'verify_certs': False,
+    'ssl_show_warn': False,
+}
 
 
 counter = 0
@@ -50,8 +58,8 @@ def clean_dict(d):
 class Walker:
     def __init__(self, args):
         self.args = args
-        self.es = Elasticsearch()
         self.filenames = set()
+        self.osearch = OpenSearch(**OPENSEARCH_PARAMS)
         self._walk()
         self._read_files()
 
@@ -64,25 +72,19 @@ class Walker:
                         self.filenames.add(fullname)
 
     def _read_files(self):
-        actions = []
+        ops = []
         for filename in self.filenames:
             with open(filename) as ifh:
-                #df = pd.read_xml(ifh)
-                #df.dropna()
-                #print(df)
-                #device = clean_dict(xmltodict.parse(ifh.read(), xml_attribs=True))
                 device = xmltodict.parse(ifh.read(), xml_attribs=True)
-                #print(device)
                 device = device.get('device', None)
                 if device:
-                    actions.append({
+                    ops.append({
                         '_op_type': 'index',
                         '_index': 'mcs',
                         '_source': device})
-                    if len(actions) % 100:
-                        esbulk(self.es, actions)
+                    if len(ops) % 100:
+                        osbulk(self.osearch, ops)
                         actions = []
-                
 
 
 if __name__ == '__main__':
