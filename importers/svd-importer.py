@@ -82,9 +82,10 @@ class Walker:
                         '_op_type': 'index',
                         '_index': 'mcs',
                         '_source': device})
-                    if len(ops) % 100:
-                        osbulk(self.osearch, ops)
-                        actions = []
+                if len(ops) % 100:
+                    osbulk(self.osearch, ops)
+                    ops = []
+        osbulk(self.osearch, ops)
 
 
 if __name__ == '__main__':
