@@ -1,0 +1,1 @@
+p_peripheral_instance.peripheral_id = p_peripheral.id
